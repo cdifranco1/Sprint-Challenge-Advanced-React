@@ -1,26 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
+import axios from 'axios';
+import { PlayerList } from './components/PlayerList'
 import './App.css';
+import { SearchForm } from './components/SearchForm';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor (){
+    super()
+    this.state = {
+      players: [],
+      searchTerm: ''
+    }
+  };
+
+  handleSearch = (e) => {
+    this.setState({searchTerm: e.target.value})
+  }
+
+  componentDidMount(){
+    axios
+      .get(`http://localhost:5000/api/players`)
+      .then(res => this.setState({
+        players: res.data
+      }))
+    console.log(this.state.players)
+  }
+
+  render(){
+    return (
+      <div style={{padding: '1% 2%'}}>
+        <SearchForm onChange={this.handleSearch} />
+        <PlayerList searchTerm={this.state.searchTerm}players={this.state.players} />
+      </div>
+    );
+  }
 }
 
 export default App;
