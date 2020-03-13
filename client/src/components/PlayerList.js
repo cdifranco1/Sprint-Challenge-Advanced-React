@@ -22,8 +22,10 @@ export const PlayerList = ({players, searchTerm}) => {
           <div><strong>Country: </strong>{player.country}</div>
           <button onClick={() => {
             setFavoritePlayer(player.name)
-            console.log(player.name)
-            }}>Save Favorite Player</button>
+            }}
+          >
+              Save Favorite Player
+          </button>
         </ListGroupItem>
       )}        
       </ListGroup>

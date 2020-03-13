@@ -29,7 +29,7 @@ class App extends React.Component {
   render(){
     return (
       <div style={{padding: '1% 2%'}}>
-        <SearchForm onChange={this.handleSearch} />
+        <SearchForm onChange={this.handleSearch} searchTerm={this.state.searchTerm} />
         <PlayerList searchTerm={this.state.searchTerm}players={this.state.players} />
       </div>
     );
